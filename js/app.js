@@ -1,4 +1,4 @@
-function cartQuantityUpdate(cartButtonClass, isPlus) {
+function cartUpdate(cartButtonClass, isPlus) {
     // Getting cart buttons 
     const cartButtons = document.getElementsByClassName(cartButtonClass);
     // Looping all the buttons 
@@ -30,10 +30,21 @@ function cartQuantityUpdate(cartButtonClass, isPlus) {
             } else if (itemId == 'case-price') {
                 itemPrice.innerText = parseInt(cartQuantityInput.value) * 59;
             }
+
+            // Total calculation 
+            const subTotal = document.getElementById('sub-total');
+            const tax = document.getElementById('tax-amount');
+            const total = document.getElementById('total-price');
+            const phonePrice = document.getElementById('phone-price').innerText;
+            const casePrice = document.getElementById('case-price').innerText;
+            subTotal.innerText = parseInt(phonePrice) + parseInt(casePrice);
+            tax.innerText = parseInt(subTotal.innerText) / 10;
+            total.innerText = parseInt(subTotal.innerText) + parseInt(tax.innerText);
+
         })
     }
 }
 
 
-cartQuantityUpdate('cart-plus', true);
-cartQuantityUpdate('cart-minus', false);
+cartUpdate('cart-plus', true);
+cartUpdate('cart-minus', false);
